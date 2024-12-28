@@ -17,6 +17,8 @@ services:
       context: ./metric
     depends_on:
       - rabbitmq
+    volumes:
+      - ./logs:/app/logs
 
   plot:
     build:
