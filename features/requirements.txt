@@ -2,4 +2,3 @@ numpy
 scikit-learn
 pika
 datetime
-json
