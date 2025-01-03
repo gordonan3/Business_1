@@ -12,13 +12,15 @@ while True:
     try:
         # Формируем случайный индекс строки
         random_row = np.random.randint(0, X.shape[0])
-
-        # Генерируем уникальный идентификатор
         message_id = datetime.timestamp(datetime.now())
+
+        print(f"Случайный индекс: {random_row}, id: {message_id}")
 
         # Создаём подключение к RabbitMQ
         connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
         channel = connection.channel()
+
+        print("Подключение к RabbitMQ установлено. Очереди созданы.")
 
         # Создаём очереди
         channel.queue_declare(queue='y_true')
@@ -29,6 +31,7 @@ while True:
             'id': message_id,
             'body': y[random_row]
         }
+        print(f"Подготовка сообщения для y_true: {message_y_true}")
         channel.basic_publish(exchange='', routing_key='y_true', body=json.dumps(message_y_true))
         print(f"[{message_id}] Сообщение с правильным ответом отправлено в очередь y_true")
 
@@ -37,11 +40,13 @@ while True:
             'id': message_id,
             'body': list(X[random_row])
         }
+        print(f"Подготовка сообщения для features: {message_features}")
         channel.basic_publish(exchange='', routing_key='features', body=json.dumps(message_features))
         print(f"[{message_id}] Сообщение с признаками отправлено в очередь features")
 
         # Закрываем подключение
         connection.close()
+        print("Подключение закрыто.")
 
         # Задержка перед следующей итерацией
         time.sleep(2)
