@@ -44,12 +44,13 @@ while True:
         channel.basic_publish(exchange='', routing_key='features', body=json.dumps(message_features))
         print(f"[{message_id}] Сообщение с признаками отправлено в очередь features")
 
-        # Закрываем подключение
-        connection.close()
-        print("Подключение закрыто.")
-
         # Задержка перед следующей итерацией
         time.sleep(2)
 
     except Exception as e:
         print(f"Ошибка: {e}")
+        break
+
+# Закрываем подключение
+connection.close()
+print("Подключение закрыто.")
