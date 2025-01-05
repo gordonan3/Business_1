@@ -19,6 +19,14 @@ services:
     depends_on:
       - rabbitmq
 
+  predict:
+    build:
+      context: ./predict
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./predict:/app
+
   metric:
     build:
       context: ./metric
