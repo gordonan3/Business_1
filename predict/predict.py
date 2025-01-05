@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 
 # Загружаем обученную модель
-with open('./logs/model.pkl', 'rb') as f:
+with open('./predict/model.pkl', 'rb') as f:
     model = pickle.load(f)
 print("Модель успешно загружена.")
 
