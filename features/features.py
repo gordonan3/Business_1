@@ -11,24 +11,6 @@ import time
 # Загружаем датасет о диабете
 X, y = load_diabetes(return_X_y=True)
 
-# Проверяем, существует ли обученная модель
-model_path = './logs/model.pkl'
-if not os.path.exists('./logs'):
-    os.makedirs('./logs')
-
-if not os.path.exists(model_path):
-    # Обучаем модель
-    print("Обучение модели...")
-    model = LinearRegression()
-    model.fit(X, y)
-    
-    # Сохраняем модель
-    with open(model_path, 'wb') as f:
-        pickle.dump(model, f)
-    print(f"Модель обучена и сохранена в {model_path}")
-else:
-    print(f"Модель уже существует: {model_path}")
-
 while True:
     try:
         # Формируем случайный индекс строки
