@@ -2,6 +2,7 @@ import pika
 import json
 import numpy as np
 import pickle
+import sklearn
 from sklearn.linear_model import LinearRegression
 
 # Загружаем обученную модель
